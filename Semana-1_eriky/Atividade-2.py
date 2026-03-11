@@ -1,11 +1,9 @@
 def valida_data(data):
-    # 1. Verifica primeiro o formato e o tamanho (evita erro de posição)
     if len(data) != 10:
         return False
     if data[2] != "/" or data[5] != "/":
         return False
     
-    # 2. Verifica se o que deveria ser número realmente é número (substitui o try)
     dia_str = data[0:2]
     mes_str = data[3:5]
     ano_str = data[6:10]
@@ -26,7 +24,7 @@ def valida_data(data):
             max_dias = 29
         else:
             max_dias = 28
-    elif mes == 4 or mes == 6 or mes == 9 or mes == 11:
+    elif mes in (4, 6, 9, 11):
         max_dias = 30
     else:
         max_dias = 31
@@ -67,18 +65,24 @@ def ler_email():
             return email
         else:
             print("Email inválido. Tente novamente.")
+
+def cad_usuario():
+    nome = ler_nome()
+    data_nasc = ler_data_nasc()
+    email = ler_email()
+    return nome, data_nasc, email
+
+def exib_dados(nome, data_nasc, email):
+    print("\n=============== Dados do Usuario ===============")
+    print("Nome:", nome)
+    print("Data de Nascimento:", data_nasc)
+    print("Email:", email)
             
 print("============= Cadastro de Usuarios =============")
 
 fim = False
 
 while fim == False:
-    nome = ler_nome()
-    data_nasc = ler_data_nasc()
-    email = ler_email()
+    nome, data_nasc, email = cad_usuario()
+    exib_dados(nome, data_nasc, email)
     fim = True
-
-print("\n=============== Dados do Usuario ===============")
-print("Nome:", nome)
-print("Data de Nascimento:", data_nasc)
-print("Email:", email)
