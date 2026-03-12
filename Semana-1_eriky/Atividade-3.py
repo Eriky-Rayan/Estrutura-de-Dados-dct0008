@@ -99,6 +99,11 @@ def list_usuario():
 if __name__ == "__main__":
     op = -1
     while op != 0:
+        print("\n=============== Menu ===============")
+        print("1 - Cadastrar Usuario")
+        print("2 - Listar Usuario")
+        print("0 - Sair")
+        print("\n====================================")
         op = str(input("Digite uma opção: "))
         match op:
             case "1":
