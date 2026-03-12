@@ -1,7 +1,8 @@
 '''
-leitura e validação de dados do usuario (nome, data de nascimento e email).
-Autor: Eriky R. B. de Medeiro auxiliado por Copilot
+Validar e salvar os dados (nome, data de nascimento, email) em arquivo de texto.
+Autor: Eriky R. B. de Medeiro
 '''
+import pickle
 
 def valida_data(data):
     if len(data) != 10:
@@ -78,16 +79,26 @@ def cad_usuario():
     return nome, data_nasc, email
 
 def exib_dados(nome, data_nasc, email):
+    #arq_usuario = open("usuario.txt", "rt")
+    
     print("\n=============== Dados do Usuario ===============")
     print("Nome:", nome)
     print("Data de Nascimento:", data_nasc)
     print("Email:", email)
+
+#Funções para salvar e carregar dados.
+
+def salvar_usuario(nome, data_nasc, email):
+    arq_usuario = open("usuario.txt", "at")
+    pickle.dump((nome, data_nasc, email), arq_usuario)
+    arq_usuario.close()
             
 print("============= Cadastro de Usuarios =============")
 
 fim = False
 
-while fim == False:
-    nome, data_nasc, email = cad_usuario()
-    exib_dados(nome, data_nasc, email)
-    fim = True
+if __name__ == "__main__":
+    while fim == False:
+        nome, data_nasc, email = cad_usuario()
+        exib_dados(nome, data_nasc, email)
+        fim = True
