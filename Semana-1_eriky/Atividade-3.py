@@ -73,32 +73,41 @@ def ler_email():
             print("Email inválido. Tente novamente.")
 
 def cad_usuario():
+    print("\n=============== Cadastro de Usuario ===============")
     nome = ler_nome()
     data_nasc = ler_data_nasc()
     email = ler_email()
     return nome, data_nasc, email
 
-def exib_dados(nome, data_nasc, email):
-    #arq_usuario = open("usuario.txt", "rt")
-    
-    print("\n=============== Dados do Usuario ===============")
-    print("Nome:", nome)
-    print("Data de Nascimento:", data_nasc)
-    print("Email:", email)
-
 #Funções para salvar e carregar dados.
 
 def salvar_usuario(nome, data_nasc, email):
-    arq_usuario = open("usuario.txt", "at")
-    pickle.dump((nome, data_nasc, email), arq_usuario)
-    arq_usuario.close()
+    with open("usuarios.txt", "a") as arq_usuario:
+        arq_usuario.write(f"{nome},{data_nasc},{email}\n")
             
-print("============= Cadastro de Usuarios =============")
+def list_usuario():
+    with open("usuarios.txt", "r") as arq_usuario:
+        for linha in arq_usuario:
+            nome, data_nasc, email = linha.strip().split(",")
+            print("\n=============== Dados do Usuario ===============")
+            print("Nome:", nome)
+            print("Data de Nascimento:", data_nasc)
+            print("Email:", email)
+            break
 
-fim = False
 
 if __name__ == "__main__":
-    while fim == False:
-        nome, data_nasc, email = cad_usuario()
-        exib_dados(nome, data_nasc, email)
-        fim = True
+    op = -1
+    while op != 0:
+        op = str(input("Digite uma opção: "))
+        match op:
+            case "1":
+                nome, data_nasc, email = cad_usuario()
+                salvar_usuario(nome, data_nasc, email)
+            case "2":
+                list_usuario()
+            case "0":
+                print("Encerrando o programa...")
+                break
+            case _:                    
+                print("Opção inválida. Tente novamente.")
