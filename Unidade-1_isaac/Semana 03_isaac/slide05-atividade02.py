@@ -1,12 +1,13 @@
-lista = [1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-n = int(input("Digite o número a ser buscado: "))
+lista = [2,2,2,3,4,4,5,6,7,8]
+lista_repetidos = []
 
-
-def função(lista, n):
-    contador = 0 
+def funcao(lista):
     for i in lista:
-        if i == n:
-            contador += 1
-    return contador
+        if lista.count(i) > 1:
+            if i not in lista_repetidos:
+                lista_repetidos.append(i)
+            else:
+                lista_repetidos.append(i)
+    return lista_repetidos
 
-print(f"O número {n} aparece {função(lista, n)} vezes na lista.")
+print(funcao(lista))
